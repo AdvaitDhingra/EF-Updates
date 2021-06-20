@@ -17,7 +17,7 @@ export default function Home() {
     const post = () => {
 
 
-        var date = new Date().toDateString();
+        var date = new Date().toLocaleTimeString() + " am " + new Date().toLocaleDateString();
 
         fire.firestore().collection("posts").add({
             post: postText,
