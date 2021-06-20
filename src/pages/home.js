@@ -67,6 +67,9 @@ export default function Home() {
             <br></br>
             <div>
                 {posts.map(post => {
+
+                    var nameArray = post.user.split("@")
+
                     return(
                         <Card key = {post.time} style = {{
                             maxWidth: "600px",
@@ -80,7 +83,7 @@ export default function Home() {
                             <Avatar src = {post.image}/>
                             <div>
                                 <Typography variant = "h6">{post.post}</Typography>
-                                <Typography>Gepostet von: {post.user} um {post.time}</Typography>
+                                <Typography>Gepostet von: {nameArray[0]} um {post.time}</Typography>
                             </div>
                         </Card>
                     )
