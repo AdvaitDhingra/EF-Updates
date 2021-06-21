@@ -56,7 +56,7 @@ export default function Header() {
           </Link>
         </div>
       </Toolbar>
-      <Drawer open={MenuOpen} onClose={() => setMenuOpen(false)}>
+      <Drawer open={menuOpen} onClose={() => setMenuOpen(false)}>
         <List>
           <ListItem>
             <Link
