@@ -36,6 +36,7 @@ export default function Profile() {
           onChange={(e) => setProfilePicture(e.target.value)}
         />
         <br></br>
+        <Typography variant="h6">Email Adresse:</Typography>
         <Input 
           type = "email"
           defaultValue = {fire.auth().currentUser.email}
