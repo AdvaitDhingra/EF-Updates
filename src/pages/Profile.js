@@ -29,14 +29,14 @@ export default function Profile() {
             to="/"
             style={{
               textDecoration: "none",
-              color: "black",
+              color: "white",
             }}
           >
             <Typography variant="h5">EF-Updates</Typography>
           </Link>
           <Link
             style={{
-              color: "black",
+              color: "white",
               textDecoration: "none",
             }}
             to="/profil"
