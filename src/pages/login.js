@@ -40,7 +40,7 @@ export default function Login() {
                         <Input type = "Email" placeholder = "email" onChange = {(e) => setEmail(e.target.value)}/>
                         <Input type = "password" placeholder = "Passwort" onChange = {(e) => setPassword(e.target.value)}/>
                         <Button variant = "contained" color = "primary" onClick = {login}>Einloggen</Button>
-                        <p>Hast du noch kein Account? <button onClick = {() => setSignIn(false)}>Anmelden</button></p>
+                        <p>Hast du noch kein Account? <Button onClick = {() => setSignIn(false)}>Anmelden</Button></p>
                     </Card>
                 ) : (
                     <Card style = {{
@@ -59,7 +59,7 @@ export default function Login() {
                         <Input type = "Email" placeholder = "email" onChange = {(e) => setEmail(e.target.value)}/>
                         <Input type = "password" placeholder = "Passwort" onChange = {(e) => setPassword(e.target.value)}/>
                         <Button variant = "contained" color = "primary" onClick = {signUp}>Anmelden</Button>
-                        <p>Hast du schon einein Account? <button onClick = {() => setSignIn(true)}>Einloggen</button></p>
+                        <p>Hast du schon einein Account? <Button onClick = {() => setSignIn(true)}>Einloggen</Button></p>
                     </Card>
                 )
             }
