@@ -23,13 +23,13 @@ export default function Profile() {
                 }}>
                     <Link to = "/" style = {{
                         textDecoration: "none",
-                        color: "black"
+                        color: "white"
                     }}><Typography variant = "h5">EF-Updates</Typography></Link>
                     <Link style = {{
-                        color: "black",
+                        color: "white",
                         textDecoration: "none"
                     }} to = "/profil">Profil Bearbeiten</Link>
-                    <Button onClick = {() => fire.auth().signOut()}>Ausloggen</Button>
+                    <Button onClick = {() => fire.auth().signOut()} style={{color:"white"}}>Ausloggen</Button>
                 </Toolbar>
             </AppBar>
             <div style = {{
