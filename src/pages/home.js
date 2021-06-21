@@ -1,4 +1,4 @@
-import { Typography, Input, Button, Card, Avatar, Dialog, DialogTitle, Fab } from "@material-ui/core";
+import { Typography, Input, Button, Card, Avatar, Dialog, DialogTitle, Fab, Slide } from "@material-ui/core";
 import {Add} from '@material-ui/icons'
 import { useEffect, useState } from "react";
 import fire from "../components/firebase";
@@ -33,7 +33,7 @@ export default function Home() {
     useEffect(() => {
         
 
-        fire.firestore().collection("posts").orderBy("time", "desc").onSnapshot(snapshot => {
+        fire.firestore().collection("posts").orderBy("ranks", "desc").onSnapshot(snapshot => {
             var postss = []
             snapshot.forEach(doc => {
                 postss.push(doc.data())
@@ -68,6 +68,7 @@ export default function Home() {
             <div>
                 {posts.map(post => {
                     return(
+                        <Slide in = {true}>
                         <Card key = {post.time} style = {{
                             maxWidth: "600px",
                             padding: "10px 10px",
@@ -83,6 +84,7 @@ export default function Home() {
                                 <Typography>Gepostet von: {post.user} um {post.time}</Typography>
                             </div>
                         </Card>
+                        </Slide>
                     )
                 })}
             </div>
