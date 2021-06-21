@@ -82,7 +82,7 @@ export default function Home() {
                     justifyContent: "space-around",
                   }}
                 >
-                  <Avatar className = "avatar" src={post.image} />
+                  <Avatar className="avatar" src={post.image} />
                   <div>
                     <Typography variant="h6">{post.post}</Typography>
                     <Typography>
