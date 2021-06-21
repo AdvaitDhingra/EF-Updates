@@ -1,4 +1,6 @@
-import { AppBar, Toolbar, Button } from "@material-ui/core";
+import { AppBar, Toolbar, Button, Typography } from "@material-ui/core";
+
+import fire from './firebase'
 
 import { Link } from "react-router-dom";
 

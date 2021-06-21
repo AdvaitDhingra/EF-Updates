@@ -1,7 +1,6 @@
-import { Typography, Input, Button, AppBar, Toolbar } from "@material-ui/core";
+import { Typography, Input, Button } from "@material-ui/core";
 import { useState } from "react";
 import fire from "../components/firebase";
-import { Link } from "react-router-dom";
 
 import Header from "../components/header";
 

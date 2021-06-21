@@ -13,9 +13,6 @@ import { Add } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import fire from "../components/firebase";
 
-import { AppBar, Toolbar } from "@material-ui/core";
-import { Link } from "react-router-dom";
-
 import Header from "../components/header";
 
 export default function Home() {
@@ -26,31 +23,35 @@ export default function Home() {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const post = () => {
-    var date =
-      new Date().toLocaleTimeString() +
-      " am " +
-      new Date().toLocaleDateString();
+    if (postText.length <= 100) {
+      var date =
+        new Date().toLocaleTimeString() +
+        " am " +
+        new Date().toLocaleDateString();
 
-    fire
-      .firestore()
-      .collection("posts")
-      .add({
-        post: postText,
-        user: fire.auth().currentUser.email,
-        time: date,
-        image: String(fire.auth().currentUser.photoURL),
-      })
-      .then({})
-      .catch((error) => console.error(error));
+      fire
+        .firestore()
+        .collection("posts")
+        .add({
+          post: postText,
+          user: fire.auth().currentUser.email,
+          time: date,
+          image: String(fire.auth().currentUser.photoURL),
+        })
+        .then({})
+        .catch((error) => console.error(error));
 
-    setDialogOpen(false);
+      setDialogOpen(false);
+    } else {
+      alert("Text muss kürzer als 100 Zeichen sein!");
+    }
   };
 
   useEffect(() => {
     fire
       .firestore()
       .collection("posts")
-      .orderBy("ranks", "desc")
+      .orderBy("rank", "desc")
       .onSnapshot((snapshot) => {
         var postss = [];
         snapshot.forEach((doc) => {
@@ -62,7 +63,7 @@ export default function Home() {
 
   return (
     <div>
-      <Headers />
+      <Header />
       <div style={{ padding: "20px 20px" }}>
         <br></br>
         <div>
@@ -112,6 +113,7 @@ export default function Home() {
               type="text"
               placeholder="Etwas Posten"
               onChange={(e) => setPostText(e.target.value)}
+              multiline
             />
             <Button onClick={post}>Posten</Button>
           </div>
