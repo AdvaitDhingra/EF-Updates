@@ -93,6 +93,9 @@ export default function Home() {
         <br></br>
         <div>
           {posts.map((post) => {
+
+            var user = post.user.split("@")[0];
+
             return (
               <Slide in={true}>
                 <Card
@@ -109,7 +112,7 @@ export default function Home() {
                   <div>
                     <Typography variant="h6">{post.post}</Typography>
                     <Typography style={{ fontSize: "15px" }}>
-                      Gepostet von: {post.user} um {post.time}
+                      Gepostet von: {user} um {post.time}
                     </Typography>
                   </div>
                   {post.user === fire.auth().currentUser.email ? (
