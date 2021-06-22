@@ -15,7 +15,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { useEffect, useState } from "react";
 import fire from "../utils/firebase";
 
-import Header from "../components/header";
+import Header from "../components/Header";
 
 export default function Home() {
   const [postText, setPostText] = useState("");

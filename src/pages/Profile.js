@@ -2,7 +2,7 @@ import { Typography, Input, Button } from "@material-ui/core";
 import { useState } from "react";
 import fire from "../utils/firebase";
 
-import Header from "../components/header";
+import Header from "../components/Header";
 
 export default function Profile() {
   const [profilePicture, setProfilePicture] = useState("");

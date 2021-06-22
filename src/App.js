@@ -1,6 +1,6 @@
 import "./App.css";
 
-import Profile from "./pages/profile";
+import Profile from "./pages/Profile";
 import LandingPage from "./pages/LandingPage";
 
 import { Switch, Route } from "react-router-dom";

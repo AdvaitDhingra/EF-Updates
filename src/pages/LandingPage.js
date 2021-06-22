@@ -1,7 +1,7 @@
 import fire from "../utils/firebase";
 import { useEffect, useState } from "react";
-import Home from "./home";
-import Login from "./login";
+import Home from "./Home";
+import Login from "./Login";
 
 export default function LandingPage() {
   const [user, setUser] = useState({});
