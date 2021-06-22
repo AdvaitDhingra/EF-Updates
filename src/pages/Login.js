@@ -1,6 +1,6 @@
 import { Button, Card, Input } from "@material-ui/core";
 
-import fire from "../components/firebase";
+import fire from "../utils/firebase";
 
 import { useState } from "react";
 

@@ -1,6 +1,6 @@
 import { Typography, Input, Button } from "@material-ui/core";
 import { useState } from "react";
-import fire from "../components/firebase";
+import fire from "../utils/firebase";
 
 import Header from "../components/header";
 

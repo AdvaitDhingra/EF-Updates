@@ -1,4 +1,4 @@
-import fire from "../components/firebase";
+import fire from "../utils/firebase";
 import { useEffect, useState } from "react";
 import Home from "./home";
 import Login from "./login";

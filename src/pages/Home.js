@@ -13,7 +13,7 @@ import {
 import { Add } from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useEffect, useState } from "react";
-import fire from "../components/firebase";
+import fire from "../utils/firebase";
 
 import Header from "../components/header";
 
