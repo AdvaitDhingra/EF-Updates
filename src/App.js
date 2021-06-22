@@ -1,24 +1,19 @@
-import './App.css';
+import "./App.css";
+import { CssBaseline } from "@material-ui/core";
 
-import Profile from './pages/profile'
-import LandingPage from './pages/LandingPage';
+import Profile from "./pages/Profile";
+import LandingPage from "./pages/LandingPage";
 
-import { Switch, Route  } from 'react-router-dom';
-
-
-
+import { Switch, Route } from "react-router-dom";
 
 function App() {
-
-  
   return (
     <div className="App">
-      
-      
-        <Switch>
-          <Route exact path = "/" component = {LandingPage}/>
-          <Route path = "/profil" component = {Profile}/>
-        </Switch>
+      <CssBaseline />
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route path="/profil" component={Profile} />
+      </Switch>
     </div>
   );
 }
