@@ -11,7 +11,7 @@ export default function Profile() {
   const update = () => {
     fire.auth().currentUser.updateProfile({
       photoURL: profilePicture,
-      email: emailAddress
+      email: emailAddress,
     });
   };
 
@@ -23,12 +23,12 @@ export default function Profile() {
           padding: "20px 20px",
           display: "flex",
           flexDirection: "column",
-          maxWidth: "500px"
+          maxWidth: "500px",
         }}
       >
         <Typography variant="h5">Profil Bearbeiten</Typography>
         <br></br>
-        <Typography variant = "h6">Profilbild:</Typography>
+        <Typography variant="h6">Profilbild:</Typography>
         <Input
           defaultValue={fire.auth().currentUser.photoURL}
           type="text"
@@ -37,11 +37,12 @@ export default function Profile() {
         />
         <br></br>
         <Typography variant="h6">Email Adresse:</Typography>
-        <Input 
-          type = "email"
-          defaultValue = {fire.auth().currentUser.email}
-          placeholder = "Email Adresse"
-          onChange={(e) => setEmailAddress(e.target.value) }/>
+        <Input
+          type="email"
+          defaultValue={fire.auth().currentUser.email}
+          placeholder="Email Adresse"
+          onChange={(e) => setEmailAddress(e.target.value)}
+        />
         <Button
           onClick={update}
           style={{

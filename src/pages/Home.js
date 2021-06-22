@@ -20,7 +20,7 @@ import Header from "../components/header";
 export default function Home() {
   const [postText, setPostText] = useState("");
 
-  const [postRank, setPostRank] = useState(0)
+  const [postRank, setPostRank] = useState(0);
 
   const [posts, setPosts] = useState([]);
 
@@ -46,7 +46,7 @@ export default function Home() {
           time: date,
           image: String(fire.auth().currentUser.photoURL),
           docID: String(email + time),
-          rank: postRank
+          rank: postRank,
         })
         .then({})
         .catch((error) => console.error(error));
@@ -55,7 +55,7 @@ export default function Home() {
     } else {
       alert("Text muss kürzer als 100 Zeichen sein!");
     }
-    setPostRank(postRank+1);
+    setPostRank(postRank + 1);
   };
 
   const deletePost = (id) => {
@@ -68,7 +68,7 @@ export default function Home() {
       .catch((error) => {
         console.error(error);
       });
-      setPostRank(postRank-1);
+    setPostRank(postRank - 1);
   };
 
   useEffect(() => {
@@ -93,7 +93,6 @@ export default function Home() {
         <br></br>
         <div>
           {posts.map((post) => {
-
             var user = post.user.split("@")[0];
 
             return (
@@ -123,9 +122,7 @@ export default function Home() {
                         justifyContent: "space-around",
                       }}
                     >
-                      <IconButton
-                        onClick={() => deletePost(post.docID)}
-                      >
+                      <IconButton onClick={() => deletePost(post.docID)}>
                         <DeleteIcon />
                       </IconButton>
                     </div>
