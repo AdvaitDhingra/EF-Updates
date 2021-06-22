@@ -19,7 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write ./src/**/*.{ts,tsx,js,jsx}"
+    "format": "prettier --write ./src/**/*.{ts,tsx,js,jsx}",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -40,6 +41,13 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^7.29.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
     "prettier": "^2.3.1"
+  },
+  "lint-staged": {
+    "*.js": "eslint --max-warnings=0",
+    "*.{ts,tsx,js,jsx}": "prettier --write"
   }
 }
