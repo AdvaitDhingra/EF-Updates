@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Typography,
   Input,
@@ -12,18 +14,15 @@ import {
 } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { useEffect, useState } from "react";
-import fire from "../utils/firebase";
 
-import Header from "../components/Header";
+import { firestore } from "../utils/firebase";
+import { useCurrentUser } from "../utils/useCurrentUser";
 
 export default function Home() {
+  const user = useCurrentUser();
   const [postText, setPostText] = useState("");
-
   const [postRank, setPostRank] = useState(0);
-
   const [posts, setPosts] = useState([]);
-
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const post = () => {
@@ -32,19 +31,18 @@ export default function Home() {
         new Date().toLocaleTimeString() +
         " am " +
         new Date().toLocaleDateString();
-      var email = fire.auth().currentUser.email;
+      const email = user.email;
       var time = new Date().getTime();
 
       console.log(email);
-      fire
-        .firestore()
+      firestore
         .collection("posts")
         .doc(String(email + time))
         .set({
           post: postText,
           user: email,
           time: date,
-          image: String(fire.auth().currentUser.photoURL),
+          image: String(user.photoURL),
           docID: String(email + time),
           rank: postRank,
         })
@@ -59,8 +57,7 @@ export default function Home() {
   };
 
   const deletePost = (id) => {
-    fire
-      .firestore()
+    firestore
       .collection("posts")
       .doc(id)
       .delete()
@@ -72,8 +69,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fire
-      .firestore()
+    return firestore
       .collection("posts")
       .orderBy("rank", "desc")
       .onSnapshot((snapshot) => {
@@ -88,7 +84,6 @@ export default function Home() {
 
   return (
     <div>
-      <Header />
       <div style={{ padding: "20px 20px" }}>
         <br></br>
         <div>
@@ -114,7 +109,7 @@ export default function Home() {
                       Gepostet von: {user} um {post.time}
                     </Typography>
                   </div>
-                  {post.user === fire.auth().currentUser.email ? (
+                  {post.user === user.email ? (
                     <div
                       style={{
                         display: "flex",
