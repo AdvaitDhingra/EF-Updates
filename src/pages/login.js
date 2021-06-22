@@ -58,7 +58,7 @@ export default function Login() {
           </Button>
           <p>
             Hast du noch kein Account?{" "}
-            <button onClick={() => setSignIn(false)}>Anmelden</button>
+            <Button onClick={() => setSignIn(false)}>Anmelden</Button>
           </p>
         </Card>
       ) : (
@@ -92,7 +92,7 @@ export default function Login() {
           </Button>
           <p>
             Hast du schon einein Account?{" "}
-            <button onClick={() => setSignIn(true)}>Einloggen</button>
+            <Button onClick={() => setSignIn(true)}>Einloggen</Button>
           </p>
         </Card>
       )}

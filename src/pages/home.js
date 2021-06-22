@@ -8,8 +8,10 @@ import {
   DialogTitle,
   Fab,
   Slide,
+  IconButton,
 } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { useEffect, useState } from "react";
 import fire from "../components/firebase";
 
@@ -17,6 +19,8 @@ import Header from "../components/header";
 
 export default function Home() {
   const [postText, setPostText] = useState("");
+
+  const [postRank, setPostRank] = useState(0)
 
   const [posts, setPosts] = useState([]);
 
@@ -28,15 +32,21 @@ export default function Home() {
         new Date().toLocaleTimeString() +
         " am " +
         new Date().toLocaleDateString();
+      var email = fire.auth().currentUser.email;
+      var time = new Date().getTime();
 
+      console.log(email);
       fire
         .firestore()
         .collection("posts")
-        .add({
+        .doc(String(email + time))
+        .set({
           post: postText,
-          user: fire.auth().currentUser.email,
+          user: email,
           time: date,
           image: String(fire.auth().currentUser.photoURL),
+          docID: String(email + time),
+          rank: postRank
         })
         .then({})
         .catch((error) => console.error(error));
@@ -45,6 +55,20 @@ export default function Home() {
     } else {
       alert("Text muss kürzer als 100 Zeichen sein!");
     }
+    setPostRank(postRank+1);
+  };
+
+  const deletePost = (id) => {
+    fire
+      .firestore()
+      .collection("posts")
+      .doc(id)
+      .delete()
+      .then({})
+      .catch((error) => {
+        console.error(error);
+      });
+      setPostRank(postRank-1);
   };
 
   useEffect(() => {
@@ -53,6 +77,7 @@ export default function Home() {
       .collection("posts")
       .orderBy("rank", "desc")
       .onSnapshot((snapshot) => {
+        setPostRank(snapshot.size + 1);
         var postss = [];
         snapshot.forEach((doc) => {
           postss.push(doc.data());
@@ -68,27 +93,45 @@ export default function Home() {
         <br></br>
         <div>
           {posts.map((post) => {
+
+            var user = post.user.split("@")[0];
+
             return (
               <Slide in={true}>
                 <Card
                   key={post.time}
                   style={{
-                    maxWidth: "600px",
                     padding: "10px 10px",
                     marginBottom: "10px",
                     display: "flex",
                     alignItems: "center",
                     flexDirection: "row",
-                    justifyContent: "space-around",
                   }}
                 >
-                  <Avatar src={post.image} />
+                  <Avatar className="avatar" src={post.image} />
                   <div>
                     <Typography variant="h6">{post.post}</Typography>
-                    <Typography>
-                      Gepostet von: {post.user} um {post.time}
+                    <Typography style={{ fontSize: "15px" }}>
+                      Gepostet von: {user} um {post.time}
                     </Typography>
                   </div>
+                  {post.user === fire.auth().currentUser.email ? (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-around",
+                      }}
+                    >
+                      <IconButton
+                        onClick={() => deletePost(post.docID)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </Card>
               </Slide>
             );
