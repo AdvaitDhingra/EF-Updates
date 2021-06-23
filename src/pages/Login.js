@@ -1,30 +1,32 @@
-import { Button, Card, Input } from "@material-ui/core";
-
-import fire from "../utils/firebase";
-
 import { useState } from "react";
 
+import { Button, Card, Input } from "@material-ui/core";
+import { Redirect } from "react-router-dom";
+
+import { auth } from "../utils/firebase";
+import { useCurrentUser } from "../utils/useCurrentUser";
+
 export default function Login() {
+  const user = useCurrentUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [signIn, setSignIn] = useState(true);
 
   const login = () => {
-    fire
-      .auth()
+    auth
       .signInWithEmailAndPassword(email, password)
       .then({})
       .catch((error) => console.error(error));
   };
 
   const signUp = () => {
-    fire
-      .auth()
+    auth
       .createUserWithEmailAndPassword(email, password)
       .then({})
       .catch((error) => alert(error));
   };
+
+  if (user !== "loading" && user) return <Redirect to="/home" />;
   return (
     <div>
       {signIn ? (
@@ -45,7 +47,7 @@ export default function Login() {
         >
           <Input
             type="Email"
-            placeholder="email"
+            placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
@@ -79,7 +81,7 @@ export default function Login() {
         >
           <Input
             type="Email"
-            placeholder="email"
+            placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
