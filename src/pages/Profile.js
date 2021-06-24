@@ -1,16 +1,15 @@
-import { useState } from "react";
-
 import { Typography, Input, Button } from "@material-ui/core";
+import { useState } from "react";
+import fire from "../utils/firebase";
 
-import { useCurrentUser } from "../utils/useCurrentUser";
+import Header from "../components/Header";
 
 export default function Profile() {
-  const user = useCurrentUser();
   const [profilePicture, setProfilePicture] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
 
   const update = () => {
-    user.updateProfile({
+    fire.auth().currentUser.updateProfile({
       photoURL: profilePicture,
       email: emailAddress,
     });
@@ -18,6 +17,7 @@ export default function Profile() {
 
   return (
     <div>
+      <Header />
       <div
         style={{
           padding: "20px 20px",
@@ -30,7 +30,7 @@ export default function Profile() {
         <br></br>
         <Typography variant="h6">Profilbild:</Typography>
         <Input
-          defaultValue={user.photoURL}
+          defaultValue={fire.auth().currentUser.photoURL}
           type="text"
           placeholder="Profilbild URL"
           onChange={(e) => setProfilePicture(e.target.value)}
@@ -39,7 +39,7 @@ export default function Profile() {
         <Typography variant="h6">Email Adresse:</Typography>
         <Input
           type="email"
-          defaultValue={user.email}
+          defaultValue={fire.auth().currentUser.email}
           placeholder="Email Adresse"
           onChange={(e) => setEmailAddress(e.target.value)}
         />

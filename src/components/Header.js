@@ -8,18 +8,16 @@ import { ListItem } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
 import { useState } from "react";
-import { useCurrentUser } from "../utils/useCurrentUser";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const user = useCurrentUser();
 
   return (
     <AppBar position="static">
       <Toolbar>
         <div className="bigMenu">
           <Link
-            to="/home"
+            to="/"
             style={{
               textDecoration: "none",
               color: "white",
@@ -27,25 +25,21 @@ export default function Header() {
           >
             <Typography variant="h5">EF-Updates</Typography>
           </Link>
-          {user && user !== "loading" && (
-            <>
-              <Link
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                }}
-                to="/profil"
-              >
-                Profil Bearbeiten
-              </Link>
-              <Button
-                onClick={() => fire.auth().signOut()}
-                style={{ color: "white" }}
-              >
-                Ausloggen
-              </Button>
-            </>
-          )}
+          <Link
+            style={{
+              color: "white",
+              textDecoration: "none",
+            }}
+            to="/profil"
+          >
+            Profil Bearbeiten
+          </Link>
+          <Button
+            onClick={() => fire.auth().signOut()}
+            style={{ color: "white" }}
+          >
+            Ausloggen
+          </Button>
         </div>
         <div className="smallMenu">
           <IconButton onClick={() => setMenuOpen(true)}>
